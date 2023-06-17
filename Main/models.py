@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
+from autoslug import AutoSlugField
 
 
 class Author(models.Model):
@@ -13,16 +14,11 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, null=False, unique=True)
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
 
 
 class Publication(models.Model):
@@ -32,10 +28,6 @@ class Publication(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
 
 class Book(models.Model): 
     title = models.CharField(max_length=100)
