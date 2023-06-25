@@ -38,11 +38,6 @@ class Book(models.Model):
     annotation = models.TextField()
     about = models.TextField()
 
-
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        return super().save(*args, **kwargs)
