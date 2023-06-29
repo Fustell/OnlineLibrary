@@ -1,6 +1,5 @@
-from django.contrib.auth.models import update_last_login
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.settings import api_settings
+from rest_framework_simplejwt.exceptions import InvalidToken
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -12,13 +11,14 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data["refreshToken"] = data["refresh"]
-        data["accessToken"] = data["access"]
-        del data["refresh"]
-        del data["access"]
 
-        if api_settings.UPDATE_LAST_LOGIN:
-            update_last_login(None, self.user)
-        return data
+class CookieTokenRefreshSerializer(TokenRefreshSerializer):
+    refresh = None
+
+    def validate(self, attrs):
+        attrs['refresh'] = self.context['request'].COOKIES.get('refresh_token')
+
+        if(attrs['refresh']):
+            return super().validate(attrs)
+        else:
+            raise InvalidToken('No valid token found in cookie \'refresh_token\'')
