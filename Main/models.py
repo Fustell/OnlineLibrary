@@ -28,10 +28,14 @@ class Publication(models.Model):
     def __str__(self):
         return self.name
 
+def book_upload_location(instance, filename):
+    filebase, extension = filename.split('.')
+    return 'title_books/%s.%s' % (instance.slug, extension)
+
 
 class Book(models.Model): 
     title = models.CharField(max_length=100)
-    title_photo = models.ImageField(upload_to='title_photos/')
+    title_photo = models.ImageField(upload_to=book_upload_location)
     author = models.ForeignKey(Author, related_name="author", on_delete=models.CASCADE)
     slug = models.SlugField(max_length=100, null=False, unique=True)
     category = models.ForeignKey(Category, related_name="category", on_delete=models.SET_NULL, null=True)

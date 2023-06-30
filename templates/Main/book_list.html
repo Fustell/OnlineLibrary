@@ -11,7 +11,7 @@
         {% for book in books %}
         <li>
             <h2>Назва: {{ book.title }} {{ book.slug }}</h2>
-            <img src="{{ book.title_photo }}" alt="">
+            <img src="{{ book.title_photo.url }}" alt="">
             <h3>Категорія: {{ book.category }}</h3>
             <h3>Автор: {{ book.author }}</h3>
             <p>Анотація: {{ book.annotation }}</p>
