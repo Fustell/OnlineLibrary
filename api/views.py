@@ -20,7 +20,7 @@ from .serializers import AuthorSerializer, PublicationSerializer, BookSerializer
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-
+    lookup_field = 'slug'
   
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

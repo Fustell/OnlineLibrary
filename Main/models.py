@@ -32,6 +32,7 @@ class Publication(models.Model):
 class Book(models.Model): 
     title = models.CharField(max_length=100)
     title_photo = models.ImageField(upload_to='title_photos/')
+    book = models.FileField()
     author = models.ForeignKey(Author, related_name="author", on_delete=models.CASCADE)
     slug = models.SlugField(max_length=100, null=False, unique=True)
     category = models.ForeignKey(Category, related_name="category", on_delete=models.SET_NULL, null=True)
