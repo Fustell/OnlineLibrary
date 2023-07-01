@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-e7p*x@z50)&vc+z!vl8m#pa&$^b)a*pv5vny+qxn1#28w93!6e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["snuffleupagus.db.elephantsql.com",    "127.0.0.1"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
