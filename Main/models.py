@@ -43,6 +43,7 @@ class Book(models.Model):
     publication = models.ForeignKey(Publication, related_name="publication", on_delete=models.SET_NULL, null=True)
     annotation = models.TextField()
     about = models.TextField()
+    is_released = models.BooleanField()
     
     def __str__(self):
         return self.title

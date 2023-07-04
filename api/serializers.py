@@ -13,12 +13,11 @@ class BookSerializer(serializers.ModelSerializer):
         fields = '__all__'
         lookup_field = 'slug'
 
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category 
         fields = '__all__'
-
-
 
 
 class PublicationSerializer(serializers.ModelSerializer):
