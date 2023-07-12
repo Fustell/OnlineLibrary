@@ -44,6 +44,7 @@ class Book(models.Model):
     annotation = models.TextField()
     about = models.TextField()
     year_release = models.IntegerField(null=True)
+    is_released = models.BooleanField()
     
     def __str__(self):
         return self.title

@@ -11,16 +11,6 @@ class AuthorListView(ListView):
     context_object_name = 'authors'
 
 
-
-# doesnt work!!!!!!!!!!!!!!!!!!!!!!!!!1
-class AuthorBookListView(ListView):   
-    model = Book
-    template_name = 'Main/author_book_list.html'
-    context_object_name = 'author_books'
-    def get_queryset(self):
-        return Book.objects.filter(slug=self.kwargs.get('slug')).prefetch_related('author')
-    
-
 # list of books
 class BookListView(ListView):
     model = Book
